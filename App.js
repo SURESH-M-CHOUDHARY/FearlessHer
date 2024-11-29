@@ -76,7 +76,7 @@ export default function App() {
 
   return (
 
-
+      //git add --all -- ':!App.js'
 
       //<NavigationContainer><AccountSection/></NavigationContainer>
       //<NavigationContainer><ChatScreen/></NavigationContainer>
