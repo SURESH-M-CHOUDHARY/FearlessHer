@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Pressable, Button, Alert, StyleSheet, Text, Image } from 'react-native';
+import { View, TextInput, TouchableOpacity,Pressable, Button, Alert, StyleSheet, Text, Image } from 'react-native';
 
 const LoginScreen = ({ onLogin, onSwitchToSignup }) => {
     const [username, setUsername] = useState('');
@@ -49,9 +49,9 @@ const LoginScreen = ({ onLogin, onSwitchToSignup }) => {
                 style={styles.input}
                 autoCapitalize="none"
             />
-            <Pressable style={styles.loginButton} onPress={handleLogin}>
+            <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
                 <Text style={styles.loginButtonText}>Login</Text>
-            </Pressable>
+            </TouchableOpacity>
             <Text style={styles.switchText}>
                 Don't have an account? <Text style={styles.signUpText} onPress={onSwitchToSignup}>Sign Up</Text>
             </Text>
@@ -82,6 +82,12 @@ const styles = StyleSheet.create({
     },
     safeText:{
         fontSize: 16,
+    },
+    loginButtonContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#f5fcff'
     },
     logo: {
         width: 250, // Adjust the size as needed
