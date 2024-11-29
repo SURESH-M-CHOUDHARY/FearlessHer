@@ -75,36 +75,53 @@ export default function App() {
   };
 
   return (
+
+
+
+      //<NavigationContainer><AccountSection/></NavigationContainer>
+      //<NavigationContainer><ChatScreen/></NavigationContainer>
+      //<NavigationContainer><DistressAlert/></NavigationContainer>
+      //<NavigationContainer><DistressAnimation/></NavigationContainer>
+      //<NavigationContainer><EmergencyContactsScreen/></NavigationContainer>
+      //<NavigationContainer><ExploreScreen/></NavigationContainer>
+      //<NavigationContainer><LoadingScreen/></NavigationContainer>
+      //<NavigationContainer><LoginScreen/></NavigationContainer>
+      //<NavigationContainer><NearbyUsersScreen/></NavigationContainer>
+      //<NavigationContainer><SelfDefenseTutorials/></NavigationContainer>
+      //<NavigationContainer><SignupScreen/></NavigationContainer>
+
+      ///*
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          {isLoading ? (
-              <Stack.Screen name="Loading">
-                {(props) => <LoadingScreen {...props} onLoadingComplete={() => setIsLoading(false)} />}
-              </Stack.Screen>
-          ) : token ? (
-              <Stack.Screen name="EmergencyContacts">
-                {(props) => <EmergencyContactsScreen {...props} onSaveContacts={handleSaveContacts} />}
-              </Stack.Screen>
-          ) : isSignup ? (
-              <Stack.Screen name="Signup">
-                {(props) => <SignupScreen {...props} onSignup={handleSignup} onSwitchToLogin={switchToLogin} />}
-              </Stack.Screen>
-          ) : (
-              <Stack.Screen name="Login">
-                {(props) => <LoginScreen {...props} onLogin={handleLogin} onSwitchToSignup={switchToSignup} />}
-              </Stack.Screen>
-          )}
-          <Stack.Screen name="DistressAlert">
-            {(props) => <DistressAlert {...props} token={token} setNearbyUsers={setNearbyUsers} />}
-          </Stack.Screen>
-          <Stack.Screen name="Explore">
-            {(props) => <ExploreScreen {...props} username={username} />}
-          </Stack.Screen>
-          <Stack.Screen name="Chat">
-            {(props) => <ChatScreen {...props} token={token} />}
-          </Stack.Screen>
-          <Stack.Screen name="SelfDefenseTutorials" component={SelfDefenseTutorials} />
-        </Stack.Navigator>
-      </NavigationContainer>
+            <Stack.Navigator screenOptions={{ headerShown: false }}>
+                {isLoading ? (
+                    <Stack.Screen name="Loading">
+                        {(props) => <LoadingScreen {...props} onLoadingComplete={() => setIsLoading(false)} />}
+                    </Stack.Screen>
+                ) : token ? (
+                    <Stack.Screen name="EmergencyContacts">
+                        {(props) => <EmergencyContactsScreen {...props} onSaveContacts={handleSaveContacts} />}
+                    </Stack.Screen>
+                ) : isSignup ? (
+                    <Stack.Screen name="Signup">
+                        {(props) => <SignupScreen {...props} onSignup={handleSignup} onSwitchToLogin={switchToLogin} />}
+                    </Stack.Screen>
+                ) : (
+                    <Stack.Screen name="Login">
+                        {(props) => <LoginScreen {...props} onLogin={handleLogin} onSwitchToSignup={switchToSignup} />}
+                    </Stack.Screen>
+                )}
+                <Stack.Screen name="DistressAlert">
+                    {(props) => <DistressAlert {...props} token={token} setNearbyUsers={setNearbyUsers} />}
+                </Stack.Screen>
+                <Stack.Screen name="Explore">
+                    {(props) => <ExploreScreen {...props} username={username} />}
+                </Stack.Screen>
+                <Stack.Screen name="Chat">
+                    {(props) => <ChatScreen {...props} token={token} />}
+                </Stack.Screen>
+                <Stack.Screen name="SelfDefenseTutorials" component={SelfDefenseTutorials} />
+            </Stack.Navigator>
+        </NavigationContainer>
+      //*/
   );
 }
