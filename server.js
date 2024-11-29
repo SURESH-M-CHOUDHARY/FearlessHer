@@ -13,7 +13,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // MongoDB connection string
-const mongoURI = 'mongodb+srv://1ep22cs116:Vaibhav123@mycluster.z4vvm.mongodb.net/women_safety?retryWrites=true&w=majority';
+const mongoURI = 'mongodb+srv://user104:user@104@cluster0.2rnan.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 
 // Connect to MongoDB
 const connectToDatabase = async () => {
