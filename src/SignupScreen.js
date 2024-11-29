@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Alert, StyleSheet, Text, Image, Pressable } from 'react-native';
+import {View, TextInput, Button, Alert, StyleSheet, Text, Image, Pressable, TouchableOpacity} from 'react-native';
 
 const SignupScreen = ({ onSignup, onSwitchToLogin }) => {
     const [username, setUsername] = useState('');
@@ -65,9 +65,9 @@ const SignupScreen = ({ onSignup, onSwitchToLogin }) => {
                 style={styles.input}
                 autoCapitalize="none"
             />
-            <Pressable style={styles.signUpButton} onPress={handleSignup}>
+            <TouchableOpacity style={styles.signUpButton} onPress={handleSignup}>
                 <Text style={styles.signUpButtonText}>Sign Up</Text>
-            </Pressable>
+            </TouchableOpacity>
             <Text style={styles.switchText}>
                 Already have an account? <Text style={styles.logInText} onPress={onSwitchToLogin}>Login</Text>
             </Text>
