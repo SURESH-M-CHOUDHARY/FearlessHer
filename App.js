@@ -50,7 +50,7 @@ export default function App() {
     console.log('Contacts to save:', contacts);
 
     try {
-      const response = await fetch('http://192.168.70.207:5000/api/save-contacts', {
+      const response = await fetch('http://192.168.155.134:5000/api/save-contacts', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
