@@ -130,13 +130,15 @@ const DistressAlertScreen = ({ token, username, navigation }) => {
                     </MapView>
                 ) : (
                     <>
-                        <Text style={styles.heroText}>
-                        <Text style={styles.emergencyText}>Are you in an emergency?{"\n"}</Text>
-                        <Text style={styles.instructionText}>
-                            {"\n"}Press and hold the SOS button for 3 seconds to send a distress signal.{"\n"}
-                        </Text>
-                        </Text>
-                        <Image source={require('../assets/Images/emergencyImage.png')} style={styles.emergencyImage} />
+                        <View style={styles.heroContainer}>
+                            <Text style={styles.heroText}>
+                            <Text style={styles.emergencyText}>Are you in an emergency?{"\n"}</Text>
+                            <Text style={styles.instructionText}>
+                                {"\n"}Press and hold the SOS button for 3 seconds to send a distress signal.{"\n"}
+                            </Text>
+                            </Text>
+                            <Image source={require('../assets/Images/emergencyImage.png')} style={styles.emergencyImage} />
+                        </View>
                         <TouchableOpacity
                             style={styles.sosButton}
                             onLongPress={handleSOSPress}
@@ -200,37 +202,34 @@ const styles = StyleSheet.create({
         width: 40,
         height: 40,
     },
-    heroText: {
-        alignSelf: 'flex-start',
-        width: '60%',
-        textAlign: 'left',
-        marginTop: -246,
-        marginLeft: 12,
-        marginright: 0,
+    heroContainer: {
+        width: '100%',
+        height: '210px',
+        flex: 1,
+        justifyContent: 'space-evenly',
+        alignItems: 'flex-start',
+        flexDirection: 'row',
+        marginTop: 60,
         marginBottom: 20,
+    },
+    heroText: {
+        alignSelf: 'stretch',
+        width: '50%',
+        textAlign: 'left',
     },
     emergencyText: {
         lineHeight: 28,
         fontSize: 24,
         fontWeight: 'bold',
         color: '#313A51',
-        marginBottom: 20,
-        //textAlign: 'left',
     },
     instructionText: {
         lineHeight: 24,
         fontSize: 16,
         color: '#313A51',
-        textAlign: 'center',
-        marginTop: 20,
-        marginBottom: 20,
     },
     emergencyImage: {
-        alignSelf: 'flex-end',
-        marginTop: -200,
-        marginright: 12,
-        marginBottom: 20,
-        marginLeft: -12,
+        //alignSelf: 'stretch',
     },
     sosButton: {
         backgroundColor: '#674188',
