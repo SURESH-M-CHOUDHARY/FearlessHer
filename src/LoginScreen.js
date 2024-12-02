@@ -6,7 +6,7 @@ const LoginScreen = ({ onLogin, onSwitchToSignup }) => {
     const [password, setPassword] = useState('');
 
     const handleLogin = async () => {
-        const loginResponse = await fetch('http://192.168.70.207:5000/api/login', {
+        const loginResponse = await fetch('https://fearlessher-backend.onrender.com/api/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
         borderRadius: 7,
         padding: 10,
         marginBottom: 10,
-        backgroundColor: '#674188', 
+        backgroundColor: '#674188',
     },
     loginButtonText: {
         color: '#fff',
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     signUpText: {
-        color: '#674188', 
+        color: '#674188',
         textDecorationLine: 'underline',
     },
 });
