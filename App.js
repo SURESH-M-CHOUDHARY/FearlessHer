@@ -11,6 +11,9 @@ import ExploreScreen from './src/ExploreScreen';
 import AccountSection from './src/AccountSection';
 import ChatScreen from './src/ChatScreen';
 import SelfDefenseTutorials from './src/SelfDefenseTutorials';
+import {useFonts} from "expo-font";
+import {ActivityIndicator, View, Text} from "react-native";
+import NavBar from "./src/components/NavBar";
 
 const Stack = createNativeStackNavigator();
 
