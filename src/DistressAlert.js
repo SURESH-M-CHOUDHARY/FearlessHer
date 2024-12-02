@@ -1,10 +1,11 @@
-// src/DistressAlertScreen.js
+
 import React, { useState, useEffect } from 'react';
 import { View, Text, Alert, StyleSheet, TouchableOpacity, Image, Animated } from 'react-native';
 import * as Location from 'expo-location';
 import MapView, { Marker } from 'react-native-maps';
 import { useFocusEffect } from '@react-navigation/native';
 import NavBar from './components/NavBar';
+import Footer from "./components/Footer";
 
 const DistressAlertScreen = ({ token, username, navigation }) => {
     const [location, setLocation] = useState('Fetching location...');
@@ -96,6 +97,7 @@ const DistressAlertScreen = ({ token, username, navigation }) => {
                 onNotificationPress={() => console.log('Notification pressed')}
                 navigation={navigation}
             />
+            <Footer/>
             <View style={styles.content1}>
                 {showMap ? (
                     <MapView
@@ -130,29 +132,40 @@ const DistressAlertScreen = ({ token, username, navigation }) => {
                     </MapView>
                 ) : (
                     <>
-                        <View style={styles.heroContainer}>
-                            <Text style={styles.heroText}>
-                            <Text style={styles.emergencyText}>Are you in an emergency?{"\n"}</Text>
-                            <Text style={styles.instructionText}>
-                                {"\n"}Press and hold the SOS button for 3 seconds to send a distress signal.{"\n"}
-                            </Text>
-                            </Text>
-                            <Image source={require('../assets/Images/emergencyImage.png')} style={styles.emergencyImage} />
+                        <View style={styles.heroContent}>
+                            <View style={styles.heroText}>
+                                <Text style={styles.emergencyText}>Are you in an emergency?{"\n"}</Text>
+                                <Text style={styles.instructionText}>
+                                    {"\n"}Press and hold the SOS button for 3 seconds to send an emergency distress signal{"\n"}
+                                </Text>
+                            </View>
+                            <View style={styles.emergencyImage}>
+                                <Image source={require('../assets/Images/emergencyImage.png')} style={styles.emergencyImage} />
+                            </View>
                         </View>
-                        <TouchableOpacity
-                            style={styles.sosButton}
-                            onLongPress={handleSOSPress}
-                            delayLongPress={2000}
-                        >
-                            <Text style={styles.sosButtonText}>SOS</Text>
-                            <Text style={styles.sosButtonInstruction}>Press 3 seconds</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            style={styles.exploreButton}
-                            onPress={() => navigation.navigate('Explore')}
-                        >
-                            <Text style={styles.exploreButtonText}>Explore FearlessHer</Text>
-                        </TouchableOpacity>
+                        <View style={styles.sosRecBgContent}>
+                            <View style={styles.sosCirBgContent}>
+                                <View style={styles.content2}>
+                                    <TouchableOpacity
+                                        style={styles.sosButton}
+                                        onLongPress={handleSOSPress}
+                                        delayLongPress={2000}
+                                    >
+                                        <Text style={styles.sosButtonText}>SOS</Text>
+                                        <Text style={styles.sosButtonInstruction}>Press 3 seconds</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
+
+                        <View style={styles.exploreButtonContent}>
+                            <TouchableOpacity
+                                style={styles.exploreButton}
+                                onPress={() => navigation.navigate('Explore')}
+                            >
+                                <Text style={styles.exploreButtonText}>Explore FearlessHer</Text>
+                            </TouchableOpacity>
+                        </View>
                     </>
                 )}
             </View>
@@ -173,9 +186,9 @@ const styles = StyleSheet.create({
     },
     content1: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        
+
     },
     map: {
         flex: 1,
@@ -202,72 +215,123 @@ const styles = StyleSheet.create({
         width: 40,
         height: 40,
     },
-    heroContainer: {
-        width: '100%',
-        height: '210px',
-        flex: 1,
-        justifyContent: 'space-evenly',
-        alignItems: 'flex-start',
+    heroContent: {
+        //backgroundColor:"#688909",
+        //w, h 93, 23
+        width: 372,
+        height: 210,
+        justifyContent: 'space-between',
+        alignItems: 'center',
         flexDirection: 'row',
-        marginTop: 60,
-        marginBottom: 20,
+        marginTop: 15,
+        marginBottom: -130,
     },
     heroText: {
-        alignSelf: 'stretch',
-        width: '50%',
+        alignSelf: 'center',
+        width: '55%',
         textAlign: 'left',
     },
     emergencyText: {
+        width: 202,
+        height: 56,
         lineHeight: 28,
-        fontSize: 24,
-        fontWeight: 'bold',
+        fontSize: 20,
+        fontWeight: 600,
         color: '#313A51',
     },
     instructionText: {
+        width: 226,
+        height: 96,
         lineHeight: 24,
-        fontSize: 16,
+        fontSize: 13,
+        fontweight: 400,
         color: '#313A51',
     },
     emergencyImage: {
-        //alignSelf: 'stretch',
+        //width: 146,
+        //height: 169,
+        alignSelf: 'center',
+    },
+    sosRecBgContent: {
+        alignSelf: 'center',
+        flexDirection: 'row',
+        marginRight: 15,
+        marginLeft: 15,
+        marginTop: 15,
+        marginBottom: -100,
+        //w, h 93, 33
+        verticalAlign: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#F5F5FA',
+        width: 372,
+        height: 253,
+        borderRadius: 44,
+    },
+    sosCirBgContent: {
+        marginRight: 20,
+        marginLeft: 20,
+        verticalAlign: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#e5e5ef',
+        width: '55%',
+        height: '83%',
+        borderRadius: '100%',
+        shadowColor: '#F5F5FA',
     },
     sosButton: {
+        alignSelf: 'center',
         backgroundColor: '#674188',
         borderRadius: 100,
         width: 160,
         height: 160,
         alignItems: 'center',
         justifyContent: 'center',
-        elevation: 5,
+        elevation: 4,
         shadowColor: '#000',
         shadowOffset: {
             width: 0,
-            height: 2,
+            height: 10,
         },
         shadowOpacity: 0.3,
         shadowRadius: 4,
     },
     sosButtonText: {
-        fontSize: 30,
+        fontSize: 32,
+        textAlign: 'center',
         color: '#fff',
         fontWeight: 'bold',
     },
     sosButtonInstruction: {
-        fontSize: 16,
+        fontSize: 12,
+        textAlign: 'center',
+        fontWeight: 500,
         color: '#fff',
         marginTop: 5,
     },
+    exploreButtonContent:{
+        //backgroundColor: 'lightgreen',
+        marginTop: 15,
+        marginBottom: 100,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+    },
     exploreButton: {
-        backgroundColor: '#674188',
-        borderRadius: 10,
+        elevation: 2,
+        backgroundColor: '#fff',
+        borderColor: '#674188',
+        borderWidth: 1,
+        borderRadius: 20,
         paddingVertical: 15,
         paddingHorizontal: 30,
-        marginTop: 20,
+        marginTop: 10,
+        marginBottom: 30,
         alignItems: 'center',
     },
     exploreButtonText: {
         fontSize: 18,
-        color: '#fff',
+        color: '#674188',
         fontWeight: 'bold',
     },
 });
