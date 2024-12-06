@@ -81,6 +81,22 @@ export default function App() {
   };
 
   return (
+
+      //git add --all -- ':!App.js'
+
+      //<NavigationContainer><AccountSection/></NavigationContainer>
+      //<NavigationContainer><ChatScreen/></NavigationContainer>
+      //<NavigationContainer><DistressAlert/></NavigationContainer>
+      //<NavigationContainer><DistressAnimation/></NavigationContainer>
+      //<NavigationContainer><EmergencyContactsScreen/></NavigationContainer>
+      //<NavigationContainer><ExploreScreen/></NavigationContainer>
+      //<NavigationContainer><LoadingScreen/></NavigationContainer>
+      //<NavigationContainer><LoginScreen/></NavigationContainer>
+      //<NavigationContainer><NearbyUsersScreen/></NavigationContainer>
+      //<NavigationContainer><SelfDefenseTutorials/></NavigationContainer>
+      //<NavigationContainer><SignupScreen/></NavigationContainer>
+
+      ///*
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           {isLoading ? (
@@ -123,6 +139,7 @@ export default function App() {
           <Stack.Screen name="SelfDefenseTutorials" component={SelfDefenseTutorials} />
         </Stack.Navigator>
       </NavigationContainer>
+      //*/
   );
 }
 
