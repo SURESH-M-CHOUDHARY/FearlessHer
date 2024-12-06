@@ -4,16 +4,13 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from './src/LoginScreen';
 import DistressAlert from './src/DistressAlert';
 import SignupScreen from './src/SignupScreen';
-import NearbyUsersScreen from './src/NearbyUsersScreen';
 import LoadingScreen from './src/LoadingScreen';
 import EmergencyContactsScreen from './src/EmergencyContactsScreen';
 import ExploreScreen from './src/ExploreScreen';
 import AccountSection from './src/AccountSection';
 import ChatScreen from './src/ChatScreen';
 import SelfDefenseTutorials from './src/SelfDefenseTutorials';
-import {useFonts} from "expo-font";
-import {ActivityIndicator, View, Text} from "react-native";
-import NavBar from "./src/components/NavBar";
+import MapScreen from './src/MapScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -37,6 +34,12 @@ export default function App() {
     setUsername(username);
   };
 
+  const handleLogout = (navigation) => {
+    setToken(null);
+    setUsername('');
+    navigation.navigate('LoginScreen');
+  };
+
   const handleSignup = (receivedToken) => {
     setToken(receivedToken);
   };
@@ -53,7 +56,7 @@ export default function App() {
     console.log('Contacts to save:', contacts);
 
     try {
-      const response = await fetch('http://192.168.155.134:5000/api/save-contacts', {
+      const response = await fetch('https://fearlessher-backend.onrender.com/api/save-contacts', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -78,53 +81,48 @@ export default function App() {
   };
 
   return (
-
-      //git add --all -- ':!App.js'
-
-      //<NavigationContainer><AccountSection/></NavigationContainer>
-      //<NavigationContainer><ChatScreen/></NavigationContainer>
-      //<NavigationContainer><DistressAlert/></NavigationContainer>
-      //<NavigationContainer><DistressAnimation/></NavigationContainer>
-      //<NavigationContainer><EmergencyContactsScreen/></NavigationContainer>
-      //<NavigationContainer><ExploreScreen/></NavigationContainer>
-      //<NavigationContainer><LoadingScreen/></NavigationContainer>
-      //<NavigationContainer><LoginScreen/></NavigationContainer>
-      //<NavigationContainer><NearbyUsersScreen/></NavigationContainer>
-      //<NavigationContainer><SelfDefenseTutorials/></NavigationContainer>
-      //<NavigationContainer><SignupScreen/></NavigationContainer>
-
-      ///*
       <NavigationContainer>
-            <Stack.Navigator screenOptions={{ headerShown: false }}>
-                {isLoading ? (
-                    <Stack.Screen name="Loading">
-                        {(props) => <LoadingScreen {...props} onLoadingComplete={() => setIsLoading(false)} />}
-                    </Stack.Screen>
-                ) : token ? (
-                    <Stack.Screen name="EmergencyContacts">
-                        {(props) => <EmergencyContactsScreen {...props} onSaveContacts={handleSaveContacts} />}
-                    </Stack.Screen>
-                ) : isSignup ? (
-                    <Stack.Screen name="Signup">
-                        {(props) => <SignupScreen {...props} onSignup={handleSignup} onSwitchToLogin={switchToLogin} />}
-                    </Stack.Screen>
-                ) : (
-                    <Stack.Screen name="Login">
-                        {(props) => <LoginScreen {...props} onLogin={handleLogin} onSwitchToSignup={switchToSignup} />}
-                    </Stack.Screen>
-                )}
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          {isLoading ? (
+              <Stack.Screen name="Loading">
+                {(props) => <LoadingScreen {...props} onLoadingComplete={() => setIsLoading(false)} />}
+              </Stack.Screen>
+          ) : token ? (
+              <>
+                <Stack.Screen name="EmergencyContacts">
+                  {(props) => <EmergencyContactsScreen {...props} onSaveContacts={handleSaveContacts} />}
+                </Stack.Screen>
                 <Stack.Screen name="DistressAlert">
-                    {(props) => <DistressAlert {...props} token={token} setNearbyUsers={setNearbyUsers} />}
+                  {(props) => <DistressAlert {...props} token={token} setNearbyUsers={setNearbyUsers} />}
                 </Stack.Screen>
-                <Stack.Screen name="Explore">
-                    {(props) => <ExploreScreen {...props} username={username} />}
+                <Stack.Screen name="Account">
+                  {(props) => (
+                      <AccountSection
+                          {...props}
+                          username={username}
+                          onLogout={() => handleLogout(props.navigation)}
+                      />
+                  )}
                 </Stack.Screen>
-                <Stack.Screen name="Chat">
-                    {(props) => <ChatScreen {...props} token={token} />}
-                </Stack.Screen>
-                <Stack.Screen name="SelfDefenseTutorials" component={SelfDefenseTutorials} />
-            </Stack.Navigator>
-        </NavigationContainer>
-      //*/
+              </>
+          ) : isSignup ? (
+              <Stack.Screen name="Signup">
+                {(props) => <SignupScreen {...props} onSignup={handleSignup} onSwitchToLogin={switchToLogin} />}
+              </Stack.Screen>
+          ) : (
+              <Stack.Screen name="LoginScreen">
+                {(props) => <LoginScreen {...props} onLogin={handleLogin} onSwitchToSignup={switchToSignup} />}
+              </Stack.Screen>
+          )}
+          <Stack.Screen name="Explore">
+            {(props) => <ExploreScreen {...props} username={username} />}
+          </Stack.Screen>
+          <Stack.Screen name="Chat">
+            {(props) => <ChatScreen {...props} token={token} />}
+          </Stack.Screen>
+          <Stack.Screen name="SelfDefenseTutorials" component={SelfDefenseTutorials} />
+        </Stack.Navigator>
+      </NavigationContainer>
   );
 }
+
