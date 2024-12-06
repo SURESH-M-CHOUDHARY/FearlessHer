@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { View, Text, Alert, StyleSheet, TouchableOpacity, Image, Animated } from 'react-native';
 import * as Location from 'expo-location';
@@ -6,6 +5,8 @@ import MapView, { Marker } from 'react-native-maps';
 import { useFocusEffect } from '@react-navigation/native';
 import NavBar from './components/NavBar';
 import Footer from "./components/Footer";
+import { Accelerometer } from 'expo-sensors';
+
 
 const DistressAlertScreen = ({ token, username, navigation }) => {
     const [location, setLocation] = useState('Fetching location...');
@@ -35,6 +36,25 @@ const DistressAlertScreen = ({ token, username, navigation }) => {
         }, [])
     );
 
+    useEffect(() => {
+        const subscription = Accelerometer.addListener(accelerometerData => {
+            const { x, y, z } = accelerometerData;
+            const shakeThreshold = 7.0; // Adjust this threshold as needed
+
+            // Check if the device is shaken
+            if (Math.abs(x) > shakeThreshold || Math.abs(y) > shakeThreshold || Math.abs(z) > shakeThreshold) {
+                handleSOSPress(); // Trigger SOS alert on shake
+            }
+        });
+
+        // Start the accelerometer
+        Accelerometer.setUpdateInterval(100); // Update interval in milliseconds
+
+        return () => {
+            subscription.remove(); // Clean up the subscription on unmount
+        };
+    }, []);
+
     const calculateDistance = (lat1, lon1, lat2, lon2) => {
         const R = 6371; // Radius of the Earth in km
         const dLat = (lat2 - lat1) * (Math.PI / 180);
@@ -58,7 +78,7 @@ const DistressAlertScreen = ({ token, username, navigation }) => {
     const sendAlert = async () => {
         console.log('Sending alert...');
         try {
-            const alertResponse = await fetch('http://192.168.70.207:5000/api/alerts', {
+            const alertResponse = await fetch('https://fearlessher-backend.onrender.com/api/alerts', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -244,7 +264,7 @@ const styles = StyleSheet.create({
         height: 96,
         lineHeight: 24,
         fontSize: 13,
-        fontweight: 400,
+        fontWeight: 400,
         color: '#313A51',
     },
     emergencyImage: {
