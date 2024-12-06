@@ -35,7 +35,7 @@ const Footer = ({ navigation }) => {
                         style={styles.sectionIcon}
                     />
                 </TouchableOpacity>
-                <Text style={[styles.sectionName, selectedTab === 'Explore' && styles.selectedText]}>Features</Text>
+                <Text style={[styles.sectionName, selectedTab === 'Explore' && styles.selectedText]}>Explore</Text>
             </View>
             <View style={styles.sectionContent}>
                 <TouchableOpacity onPress={() => handleNavigate('Profile')}>

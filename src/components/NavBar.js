@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         //marginLeft: 30,
         marginRight: 93,
-        fontFamily: 'BriemHand',
+        fontFamily: 'BriemHand-Regular',
         fontSize: 24,
         fontWeight: 'bold',
         textAlign: 'center',
